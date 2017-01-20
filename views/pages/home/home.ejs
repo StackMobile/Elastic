@@ -4,15 +4,448 @@
 <% include ../../html/body_begin %>
     <% include ../../components/topbar %>
     <% include ../../components/site_menubar %>
-    <% include ../../components/site_gridmenu %>
-    <!-- Page -->
-    <div class="page">
-        <div class="page-content container-fluid">
-        <div class="row" data-plugin="matchHeight" data-by-row="true">
-        </div>
-        </div>
-    </div>
-    <!-- End Page -->
+    <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->                      
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container">
+
+                        <!-- Page-Title 
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="page-title">Products</h4>
+								<ol class="breadcrumb">
+									<li>
+										<a href="#">Ubold</a>
+									</li>
+									<li class="active">
+										Products
+									</li>
+								</ol>
+							</div>
+						</div> -->
+
+                        <!-- SECTION FILTER
+                        ================================================== -->
+                        <div class="row m-t-10 m-b-10">
+
+                            <div class="col-sm-6">
+                                <form role="form">
+                                    <div class="form-group contact-search m-b-0">
+                                        <input type="text" id="search" class="form-control product-search" placeholder="Search here...">
+                                        <button type="submit" class="btn btn-white"><i class="fa fa-search"></i></button>
+                                    </div> <!-- form-group -->
+                                </form>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="h5 m-0 text-right">
+                                    <label class="vertical-middle m-r-10">Sort By:</label>
+                                    <div class="btn-group vertical-middle" data-toggle="buttons">
+                                         <label class="btn btn-default btn-md waves-effect active">
+                                            <input type="radio" autocomplete="off" checked=""> Status
+                                         </label>
+                                         <label class="btn btn-default btn-md waves-effect">
+                                            <input type="radio" autocomplete="off"> Type
+                                         </label>
+                                         <label class="btn btn-default btn-md waves-effect">
+                                            <input type="radio" autocomplete="off"> Name
+                                         </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="m-b-15">
+                                <div class="col-sm-6 col-lg-3 col-md-4 mobiles">
+                                    <div class="product-list-box thumb">
+                                        <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                                            <img src="../assets/images/products/big/1.jpg" class="thumb-img" alt="work-thumbnail">
+                                        </a>
+
+                                        <div class="product-action">
+                                            <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
+                                        </div>
+
+                                        <div class="price-tag">
+                                            $16
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-t-0"><a href="" class="text-dark">Samsung Gallaxy</a> </h4>
+                                            <div class="rating">
+                                                <ul class="list-inline">
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star-o" href=""></a></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="m-0"> <span class="text-muted"> Stock :98pcs.</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-3 col-md-4 other">
+                                    <div class="product-list-box thumb">
+                                        <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                                            <img src="../assets/images/products/big/2.jpg" class="thumb-img" alt="work-thumbnail">
+                                        </a>
+
+                                        <div class="product-action">
+                                            <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
+                                        </div>
+
+                                        <div class="price-tag">
+                                            $10
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-t-0"><a href="" class="text-dark">Samsung Gallaxy</a> </h4>
+                                            <div class="rating">
+                                                <ul class="list-inline">
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star-o" href=""></a></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="m-0"> <span class="text-muted"> Stock :98pcs.</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-3 col-md-4 mobiles">
+                                    <div class="product-list-box thumb">
+                                        <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                                            <img src="../assets/images/products/big/3.jpg" class="thumb-img" alt="work-thumbnail">
+                                        </a>
+
+                                        <div class="product-action">
+                                            <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
+                                        </div>
+
+                                        <div class="price-tag">
+                                            $14
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-t-0"><a href="" class="text-dark">Samsung Gallaxy</a> </h4>
+                                            <div class="rating">
+                                                <ul class="list-inline">
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star-o" href=""></a></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="m-0"> <span class="text-muted"> Stock :98pcs.</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-3 col-md-4 desktops">
+                                    <div class="product-list-box thumb">
+                                        <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                                            <img src="../assets/images/products/big/4.jpg" class="thumb-img" alt="work-thumbnail">
+                                        </a>
+
+                                        <div class="product-action">
+                                            <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
+                                        </div>
+
+                                        <div class="price-tag">
+                                            $18
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-t-0"><a href="" class="text-dark">Samsung Gallaxy</a> </h4>
+                                            <div class="rating">
+                                                <ul class="list-inline">
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star-o" href=""></a></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="m-0"> <span class="text-muted"> Stock :98pcs.</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-3 col-md-4 mobiles">
+                                    <div class="product-list-box thumb">
+                                        <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                                            <img src="../assets/images/products/big/5.jpg" class="thumb-img" alt="work-thumbnail">
+                                        </a>
+
+                                        <div class="product-action">
+                                            <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
+                                        </div>
+
+                                        <div class="price-tag">
+                                            $38
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-t-0"><a href="" class="text-dark">Samsung Gallaxy</a> </h4>
+                                            <div class="rating">
+                                                <ul class="list-inline">
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star-o" href=""></a></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="m-0"> <span class="text-muted"> Stock :98pcs.</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-3 col-md-4 other">
+                                    <div class="product-list-box thumb">
+                                        <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                                            <img src="../assets/images/products/big/6.jpg" class="thumb-img" alt="work-thumbnail">
+                                        </a>
+
+                                        <div class="product-action">
+                                            <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
+                                        </div>
+
+                                        <div class="price-tag">
+                                            $98
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-t-0"><a href="" class="text-dark">Samsung Gallaxy</a> </h4>
+                                            <div class="rating">
+                                                <ul class="list-inline">
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star-o" href=""></a></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="m-0"> <span class="text-muted"> Stock :98pcs.</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-3 col-md-4 tablets">
+                                    <div class="product-list-box thumb">
+                                        <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                                            <img src="../assets/images/products/big/7.jpg" class="thumb-img" alt="work-thumbnail">
+                                        </a>
+
+                                        <div class="product-action">
+                                            <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
+                                        </div>
+
+                                        <div class="price-tag">
+                                            $35
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-t-0"><a href="" class="text-dark">Samsung Gallaxy</a> </h4>
+                                            <div class="rating">
+                                                <ul class="list-inline">
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star-o" href=""></a></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="m-0"> <span class="text-muted"> Stock :98pcs.</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-3 col-md-4 desktops">
+                                    <div class="product-list-box thumb">
+                                        <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                                            <img src="../assets/images/products/big/8.jpg" class="thumb-img" alt="work-thumbnail">
+                                        </a>
+
+                                        <div class="product-action">
+                                            <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
+                                        </div>
+
+                                        <div class="price-tag">
+                                            $76
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-t-0"><a href="" class="text-dark">Samsung Gallaxy</a> </h4>
+                                            <div class="rating">
+                                                <ul class="list-inline">
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star-o" href=""></a></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="m-0"> <span class="text-muted"> Stock :98pcs.</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-3 col-md-4 mobiles">
+                                    <div class="product-list-box thumb">
+                                        <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                                            <img src="../assets/images/products/big/1.jpg" class="thumb-img" alt="work-thumbnail">
+                                        </a>
+
+                                        <div class="product-action">
+                                            <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
+                                        </div>
+
+                                        <div class="price-tag">
+                                            $61
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-t-0"><a href="" class="text-dark">Samsung Gallaxy</a> </h4>
+                                            <div class="rating">
+                                                <ul class="list-inline">
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star-o" href=""></a></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="m-0"> <span class="text-muted"> Stock :98pcs.</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-3 col-md-4 other">
+                                    <div class="product-list-box thumb">
+                                        <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                                            <img src="../assets/images/products/big/2.jpg" class="thumb-img" alt="work-thumbnail">
+                                        </a>
+
+                                        <div class="product-action">
+                                            <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
+                                        </div>
+
+                                        <div class="price-tag">
+                                            $56
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-t-0"><a href="" class="text-dark">Samsung Gallaxy</a> </h4>
+                                            <div class="rating">
+                                                <ul class="list-inline">
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star-o" href=""></a></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="m-0"> <span class="text-muted"> Stock :98pcs.</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-3 col-md-4 mobiles">
+                                    <div class="product-list-box thumb">
+                                        <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                                            <img src="../assets/images/products/big/3.jpg" class="thumb-img" alt="work-thumbnail">
+                                        </a>
+
+                                        <div class="product-action">
+                                            <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
+                                        </div>
+
+                                        <div class="price-tag">
+                                            $80
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-t-0"><a href="" class="text-dark">Samsung Gallaxy</a> </h4>
+                                            <div class="rating">
+                                                <ul class="list-inline">
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star-o" href=""></a></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="m-0"> <span class="text-muted"> Stock :98pcs.</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-3 col-md-4 desktops">
+                                    <div class="product-list-box thumb">
+                                        <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
+                                            <img src="../assets/images/products/big/4.jpg" class="thumb-img" alt="work-thumbnail">
+                                        </a>
+
+                                        <div class="product-action">
+                                            <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
+                                        </div>
+
+                                        <div class="price-tag">
+                                            $24
+                                        </div>
+                                        <div class="detail">
+                                            <h4 class="m-t-0"><a href="" class="text-dark">Samsung Gallaxy</a> </h4>
+                                            <div class="rating">
+                                                <ul class="list-inline">
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star" href=""></a></li>
+                                                    <li><a class="fa fa-star-o" href=""></a></li>
+                                                </ul>
+                                            </div>
+                                            <h5 class="m-0"> <span class="text-muted"> Stock :98pcs.</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                        </div> <!-- End row -->
+
+
+
+
+                    </div> <!-- container -->
+                               
+                </div> <!-- content -->
+
+                <footer class="footer text-right">
+                    © 2017. All rights reserved.
+                </footer>
+
+            </div>
+            
+            
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
     <% include ../../components/footer %>
 <% include ../../html/body_end %>
 <% include ../../html/html_end %>

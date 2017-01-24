@@ -9,7 +9,7 @@
 
                  $.ajax({
 
-                        url: 'http://ec2-54-210-169-119.compute-1.amazonaws.com:9200/news/clip/_search?pretty',
+                        url: '//ec2-54-210-169-119.compute-1.amazonaws.com:9200/news/clip/_search?pretty',
                         data: JSON.stringify( {
                            "query": {
                                 "match_all": {}
@@ -45,7 +45,7 @@
                     
                     $.ajax({
 
-                        url: 'http://ec2-54-210-169-119.compute-1.amazonaws.com:9200/news/clip/_search?pretty',
+                        url: '//ec2-54-210-169-119.compute-1.amazonaws.com:9200/news/clip/_search?pretty',
                         data: JSON.stringify( {
                             "query": {
                                 "match": {

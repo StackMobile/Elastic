@@ -87,6 +87,7 @@ Configuration.getBaseConfig = function(multisite) {
             type: 'mongodb',
             servers: [
                 '127.0.0.1:27017'
+                //''
             ],
             name: 'elastic',
             options: {

@@ -10,6 +10,7 @@ router.use('/forgot_password', require('./login/forgot_password.js'));
 
 router.use('/home', require('./home/home.js'));
 router.use('/newlink', require('./home/newlink.js'));
+router.use('/newlink/update', require('./home/newlink.js'));
 router.use('/links', require('./home/links.js'));
 
 

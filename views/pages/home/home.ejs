@@ -31,9 +31,7 @@
                     });
             }
             $(document).ready(function(){
-                var searchQuery;
-
-                
+                var searchQuery;               
                 
                 $("#submitButton").click(function(){
                     searchQuery=$("#search").val();
@@ -99,7 +97,7 @@
                     var source = object["_source"];
                     var video = new Video(source["fileName"], source["postDate"], source["feedName"], source["feedType"]);
 
-                    var div = "<div class='m-b-15'> <div class='col-sm-6 col-lg-3 col-md-4 mobiles'> <div class='product-list-box thumb'> <a href='javascript:void(0);' class='image-popup' title='Screenshot-1'> <div class='embed-responsive embed-responsive-4by3'> <video class='embed-responsive-item' controls> <source src = '//ec2-54-210-169-119.compute-1.amazonaws.com:3001/api/video/"+video.fileName+"' type = 'video/mp4'> </video> </div> </a> <div class='detail'> <h4 class='m-t-0'><a href='' class='text-dark'>"+video.feedName+"</a> <small>"+video.postDate+"</small></h4></div> </div> </div> </div>";
+                    var div = "<div class='m-b-15'> <div class='col-sm-6 col-lg-3 col-md-4 mobiles'> <div class='product-list-box thumb'> <a href='javascript:void(0);' class='image-popup' title='Screenshot-1'> <div class='embed-responsive embed-responsive-4by3'> <video class='embed-responsive-item' controls> <source src = 'http://dzjqwg2rswren.cloudfront.net/News/"+video.fileName+"' type = 'video/mp4'> </video> </div> </a> <div class='detail'> <h4 class='m-t-0'><a href='' class='text-dark'>"+video.feedName+"</a> <small>"+video.postDate+"</small></h4></div> </div> </div> </div>";
 
                     $("#videoListContent").append(div);
                 }

@@ -27,7 +27,7 @@
                                     </ul>
                                 </div>
 
-								<h4 class="page-title">A third saved search</h4>
+								<h4 class="page-title" id = "linkTitle">A third saved search</h4>
 								
 							</div>
 						</div>
@@ -52,10 +52,8 @@
 											</div>
                                             <div class = "clearfix visible-xs-block"> </div>
 											<div class="m-b-0 col-xs-9 col-sm-9">
-												<select multiple data-role="tagsinput">
-													<option value="Amsterdam">Amsterdam</option>
-													<option value="Washington">Washington</option>
-													<option value="Sydney">Sydney</option>
+												<select multiple data-role="tagsinput" id = "keywordSelect">
+													
 												</select>
 											</div>
 
@@ -72,10 +70,10 @@
 											</div>
                                             <div class = "clearfix visible-xs-block"> </div>
 											<div class="m-b-0 col-xs-9 col-sm-9">
-												<select multiple data-role="tagsinput">
-													<option value="Amsterdam">Amsterdam</option>
+												<select multiple data-role="tagsinput" id = "categorySelect">
+													<!--<option value="Amsterdam">Amsterdam</option>
 													<option value="Washington">Washington</option>
-													<option value="Sydney">Sydney</option>
+													<option value="Sydney">Sydney</option> -->
 												</select>
 											</div>
 
@@ -92,9 +90,9 @@
                                             <div class = "clearfix visible-xs-block"> </div>
                                             <div class="col-sm-8">
                                                 <div class="input-daterange input-group" id="date-range">
-                                                    <input type="text" class="form-control" name="start" />
+                                                    <input type="text" class="form-control" name="start" id = "startDateInputField"/>
                                                     <span class="input-group-addon bg-custom b-0 text-white">to</span>
-                                                    <input type="text" class="form-control" name="end" />
+                                                    <input type="text" class="form-control" name="end" id = "endDateInputField"/>
                                                 </div>
                                             </div>
                                             <!--<form action="#" class="form-horizontal">
@@ -115,10 +113,8 @@
 											</div>
                                             <div class = "clearfix visible-xs-block"> </div>
 											<div class="m-b-0 col-xs-9 col-sm-9">
-												<select multiple data-role="tagsinput">
-													<option value="Amsterdam">Amsterdam</option>
-													<option value="Washington">Washington</option>
-													<option value="Sydney">Sydney</option>
+												<select multiple data-role="tagsinput" id = "sourceSelect">
+													
 												</select>
 											</div>
 
@@ -135,7 +131,7 @@
 											</div>
                                             <div class = "clearfix visible-xs-block"> </div>
 											<div class="m-b-0 col-xs-9 col-sm-9">
-												<button type="button" class="btn btn-primary waves-effect waves-light">Submit</button>
+												<button type="button" class="btn btn-primary waves-effect waves-light" id = "linkDataSaveButton" >Submit</button>
                                                 <button type="button" class="btn btn-default waves-effect waves-light">Cancel</button>
 											</div>
 
@@ -269,8 +265,72 @@
                 </div>
             </div>
             <!-- /Right-bar -->
-
-
+            
+            
         <% include ../../components/footer %>
 <% include ../../html/body_end %>
+<script language = "JavaScript" >
+
+                var linkId;
+
+                window.onload = function() {
+
+                    linkId = window.location.hash.substring(1);
+
+                    console.log("link id is : " + linkId);
+
+                    var title =  localStorage.getItem('link');
+                    console.log("link title : " + title);
+
+                    document.getElementById('linkTitle').innerHTML = title;
+                };
+
+                 $(document).ready(function(){
+
+
+                    $('#linkDataSaveButton').click(function(){
+                         var keywordValues = $('#keywordSelect').val() || [];
+                        var categoryValues = $('#categorySelect').val()  || [];
+                        var sourceValues = $('#sourceSelect').val()  || [];
+                        var startDate = $('#startDateInputField').val() || new Date();
+                        var endDate = $('#endDateInputField').val() || new Date();
+
+                        if (keywordValues.length == 0 && categoryValues.length == 0 && sourceValues.length == 0 && !startDate && !endDate) {
+
+                            console.log("Please input one field at least.");
+                            return;
+                        }
+
+                        console.log("keywordValues id is ::::::" + keywordValues);
+
+                        var parameter = {
+                            "id": linkId,
+                            "keywords": keywordValues,
+                            "categories": categoryValues,
+                            "sources": sourceValues,
+                            "start_date": startDate,
+                            "end_date": endDate
+                        };
+
+                        $.ajax({
+                            type:'POST',
+                            data: JSON.stringify(parameter),
+                            contentType:'application/json',
+                            url:'/pages/newlink/update',
+                            error: function(error) {
+                                alert("error is occurred=="+error);
+                            },
+                            dataType:'json',
+                            success: function(data) {
+
+                                console.log(data);
+                                window.location.href = '/pages/links';
+                            },
+                        });
+                    });
+
+                   
+                 });
+
+            </script>    
 <% include ../../html/html_end %>

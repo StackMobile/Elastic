@@ -4,7 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var mongoose = require('mongoose');
+var passport = require('passport');
+var localStrategy = require('passport-local').Strategy;
 var index = require('./routes');
 var users = require('./routes/users');
 
@@ -12,11 +14,12 @@ var users = require('./routes/users');
 
 var app = express();
 
-function Elastic() {
+function Elastic(config) {
 
     this.init = () => {
 
         // view engine setup
+        app.locals.appdata = config.appData;
         app.set('views', path.join(__dirname, 'views'));
         app.set('view engine', 'ejs');
 
@@ -29,13 +32,45 @@ function Elastic() {
         app.use(express.static(path.join(__dirname, 'public')));
         app.use('/', index);
         app.use('/users', users);
+        
     };
+
+    this.connectMongoDB = () => {
+        var db = mongoose.connection;
+        db.on('error', console.error.bind(console, '[ERROR] Database loading error\n[ERROR]'));
+        db.once('open', function() {
+            console.log("[INFO] connection to the database established");
+        });
+
+        mongoose.connect(config.db.type + '://' + config.db.servers[0] + '/' + config.db.name, function(err, db) {
+            if (!err) {
+                console.log("We are connected");
+            } else {
+                console.log(err);
+            }
+        });
+    }
+
+     this.initializePassport = () => {
+        app.use(passport.initialize());
+        app.use(passport.session());
+
+        passport.serializeUser(function(user, done) {
+            done(null, user.id);
+        });
+
+        passport.deserializeUser(function(id, done) {
+            User.findById(id, function(err, user) {
+                done(err, user);
+            });
+        });
+    };
+
 
     this.initErrorHandler = () => {
         // catch 404 and forward to error handler
 
         app.use(function(req, res, next) {
-
             var err = new Error('Not Found');
             err.status = 404;
             next(err);
@@ -57,7 +92,8 @@ function Elastic() {
 
         var self = this;
         self.init();
-
+        self.connectMongoDB();
+        self.initializePassport();
         self.initErrorHandler();
     };
 
@@ -65,10 +101,10 @@ function Elastic() {
 
 Elastic.startInstance = () => {
 
-    // var Configuration = require('./config.js');
+    var Configuration = require('./config.js');
 
-    // var config = Configuration.load();
-    var elastic = new Elastic();
+    var config = Configuration.load();
+    var elastic = new Elastic(config);
     elastic.start();
 
     return elastic;

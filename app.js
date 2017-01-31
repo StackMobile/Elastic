@@ -93,8 +93,8 @@ function Elastic(config) {
 
         var self = this;
         self.init();
-        // self.connectMongoDB();
-        // self.initializePassport();
+        self.connectMongoDB();
+        self.initializePassport();
         self.initErrorHandler();
     };
 

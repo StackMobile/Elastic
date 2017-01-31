@@ -18,6 +18,7 @@ function Elastic(config) {
 
     this.init = () => {
 
+        console.log("App is running...");
         // view engine setup
         app.locals.appdata = config.appData;
         app.set('views', path.join(__dirname, 'views'));

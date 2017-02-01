@@ -3,7 +3,7 @@
         <!-- END wrapper -->
         <!-- Modal -->
 			<div id="custom-modal" class="modal-demo" style = "z-index:10003;">
-			    <button type="button" class="close" onclick="Custombox.close();">
+			    <button type="button" class="close" id = "closeBtn" >
 			        <span>&times;</span><span class="sr-only">Close</span>
 			    </button>
 			    <h4 class="custom-modal-title">New Link</h4>
@@ -105,5 +105,28 @@
                 $(".knob").knob();
 
             });
+
+            $(document).ready(function() {
+
+                $('#closeBtn').click(function(){
+                    Custombox.close();
+                    $("#sidebar-menu a").each(function() {
+                        if (this.href == window.location.href) {
+                            console.log('qqqqqqqqqqqqqqqqqqqqqqqqq');
+                            $(this).addClass("active");
+                            $(this).parent().addClass("active"); // add active to li of the current link
+                            $(this).parent().parent().prev().addClass("active"); // add active class to an anchor
+                            $(this).parent().parent().prev().click(); // click the item to make it drop
+                     }else {
+                            $(this).addClass("deactive");
+                            $(this).parent().addClass("deactive"); // add active to li of the current link
+                            $(this).parent().parent().prev().addClass("deactive"); // add active class to an anchor
+                            $(this).parent().parent().prev().click(); // click the item 
+
+                     }
+                   });           
+                    location.reload();
+                });
+});
         </script>
     </body>

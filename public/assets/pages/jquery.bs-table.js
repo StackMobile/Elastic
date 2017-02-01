@@ -6,7 +6,7 @@
 
 
 
-$(document).ready(function () {
+$(document).ready(function() {
 
 
     // BOOTSTRAP TABLE - CUSTOM TOOLBAR
@@ -14,15 +14,16 @@ $(document).ready(function () {
     // Require Bootstrap Table
     // http://bootstrap-table.wenzhixin.net.cn/
     // =================================================================
-    var $table = $('#demo-custom-toolbar'), $remove = $('#demo-delete-row');
+    var $table = $('#demo-custom-toolbar'),
+        $remove = $('#demo-delete-row');
 
 
-    $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function () {
+    $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function() {
         $remove.prop('disabled', !$table.bootstrapTable('getSelections').length);
     });
 
-    $remove.click(function () {
-        var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
+    $remove.click(function() {
+        var ids = $.map($table.bootstrapTable('getSelections'), function(row) {
             return row.id
         });
         $table.bootstrapTable('remove', {
@@ -30,6 +31,7 @@ $(document).ready(function () {
             values: ids
         });
         $remove.prop('disabled', true);
+        $('table .linkId').hide();
     });
 
 
@@ -39,13 +41,13 @@ $(document).ready(function () {
  * Hack for table loading issue - ideally this should be fixed in plugin code itself.
  */
 $(window).load(function() {
-   $('[data-toggle="table"]').show();
+    $('[data-toggle="table"]').show();
 });
 
 // Sample format for Invoice Column.
 // =================================================================
 function invoiceFormatter(value, row) {
-    return '<a href="#" class="btn-link" > Order #' + value + '</a>';
+    return '<a href="#" class="btn-link" >  Order #' + value + '</a>';
 }
 
 // Sample Format for User Name Column.
@@ -89,5 +91,3 @@ function priceSorter(a, b) {
     if (a < b) return -1;
     return 0;
 }
-
-

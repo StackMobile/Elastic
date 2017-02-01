@@ -7,14 +7,37 @@
             window.onload = function() {loadAllVideos()};
             function loadAllVideos() {
 
-                 $.ajax({
-
-                        url: '//ec2-54-210-169-119.compute-1.amazonaws.com:9200/news/clip/_search?pretty',
-                        data: JSON.stringify( {
+                 var ref = $(location).attr('search');
+                 var data = JSON.stringify( {
                            "query": {
                                 "match_all": {}
                                 }
-                        }),
+                 });
+
+                 if (!isEmpty(ref)) {
+
+                     var arr = ref.split('=');
+                     var query = arr[1];
+                     console.log('path is ...'+ query);
+
+                     data = JSON.stringify( {
+                            "query": {
+                                "match": {
+                                    "content": {
+                                        "query": query
+                                    }
+                                }
+                            }
+                    });
+                 }
+                 
+
+                 
+
+                 $.ajax({
+
+                        url: '//ec2-54-210-169-119.compute-1.amazonaws.com:9200/news/clip/_search?pretty',
+                        data: data,
                         contentType:"application/json",
                         error: function(error) {
                             alert("error is occurred=="+error);
@@ -71,7 +94,9 @@
                 });
             });
 
-            
+            function isEmpty(value) {
+                return typeof value == 'string' && !value.trim() || typeof value == 'undefined' || value === null;
+            }
 
             function Video(fileName, postDate, feedName, feedType) {
 

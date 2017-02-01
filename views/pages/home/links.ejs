@@ -17,19 +17,21 @@
 						<div class="row">
 							<div class="col-sm-8">
 								<div class="card-box">
-									<h4 class="m-t-0 header-title"><b>YOUR LINKS</b></h4>									
+									<h4 class="m-t-10 header-title"><b>YOUR LINKS</b></h4>		
+                                    <button id = "demo-delete-row" class = "btn btn-danger" disabled><i class="fa fa-times m-r-5">
+                                        </i>Delete</button> 							
 									<table 
-                                           data-toolbar = "#toolbar"
+                                           data-toolbar = "#demo-delete-row"
 										   data-page-size="10"
 										   data-pagination="true"
                                            data-id-field= "id"
                                            data-page-list="[10,25,50,100, ALL]"
-                                           class="table-bordered table" id="table">
+                                           class="table-bordered table" id="demo-custom-toolbar">
 										<thead>
 											<tr>
 												<th data-field="state" data-checkbox="true"></th>
                                                 <th data-field="id" class = "linkId">id</th>
-												<th data-field="title" data-switchable="false">Title</th>
+												<th data-field="title" data-switchable="false" data-formatter="invoiceFormatter">Title</th>
 												<th data-field="date">Date</th>												
 												<th data-field="action" 
                                                     data-events="actionEvents"
@@ -173,10 +175,13 @@
 
 <script language = "JavaScript" >
 
-    var $table = $('#table'), 
+    var $table = $('#demo-custom-toolbar'), 
         $remove = $('#remove'),
         selections = [];
 
+    function invoiceFormatter(value, row) {
+        return '<a href="/pages/home?title='+ value +'" class="btn-link" >' + value + '</a>';
+    }
     function actionFormatter(value, row, index) {
 
         return [
@@ -203,7 +208,7 @@
                 values: [row.id]
             });
 
-            $('#table .linkId').hide();
+            $('#demo-custom-toolbar .linkId').hide();
         }
     };
 
@@ -239,12 +244,12 @@
 
             //Hidden id Columns
 
-            $('#table .linkId').hide();
+            $('#demo-custom-toolbar .linkId').hide();
 
-            $('#table').on('check.bs.table', function (e, row, $el) {
+            $('#demo-custom-toolbar').on('check.bs.table', function (e, row, $el) {
                 alert('check index: ' + $el.closest('tr').data('index'));
             });
-            $('#table').on('uncheck.bs.table', function (e, row, $el) {
+            $('#demo-custom-toolbar').on('uncheck.bs.table', function (e, row, $el) {
                 alert('uncheck index: ' + $el.closest('tr').data('index'));
             });
 
@@ -274,11 +279,11 @@
                     }
 
 
-                    $('#table').bootstrapTable({
+                    $('#demo-custom-toolbar').bootstrapTable({
                         data: array
                     });
 
-                    $('#table .linkId').hide();
+                    $('#demo-custom-toolbar .linkId').hide();
                     
             });
         };

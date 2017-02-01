@@ -6,15 +6,25 @@ var async = require('async');
 User = require('../../../models/user');
 
 router.get('/', (req, res, next) => {
-    res.render('pages/login/login', { title: 'Express' });
+
+    if (req.cookies.email && req.cookies.password) {
+        console.log("redirected to home page");
+        res.render('pages/home/home', { title: 'home' });
+
+    } else {
+
+        res.render('pages/login/login', { title: 'Express' });
+
+    }
+
 });
 
-router.post('/', (req,res, next) => {
+router.post('/', (req, res, next) => {
 
     var email = req.body.email;
     var password = req.body.password;
 
-    User.findOne({email: email}, function(err, user){
+    User.findOne({ email: email }, function(err, user) {
 
         if (err != null) {
 
@@ -35,7 +45,7 @@ router.post('/', (req,res, next) => {
             if (err != null) {
 
                 console.log("Error is occurred");
-                res.render('pages/login/login', { message: 'Error when comparing password: '+ err });
+                res.render('pages/login/login', { message: 'Error when comparing password: ' + err });
                 return;
             }
 
@@ -44,9 +54,11 @@ router.post('/', (req,res, next) => {
                 res.cookie('email', email);
                 res.cookie('password', password);
 
+                console.log('password is correct-----------------------------------------------');
+
                 res.redirect('/pages/home');
                 return;
-            }else {
+            } else {
 
                 console.log('password is incorrect');
                 res.render('pages/login/login', { message: 'Login Error. Password is incorrect' });
@@ -57,8 +69,8 @@ router.post('/', (req,res, next) => {
 
 
     });
-    
-    
+
+
 });
 
 module.exports = router;

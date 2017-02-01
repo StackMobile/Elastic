@@ -17,10 +17,13 @@
         "serve-favicon": "~2.3.0",
         "mongoose": "4.0.8",
         "node.extend": "^1.1.6",
+        "nodemailer": "^2.6.4",
+        "email-verification": "^0.4.5",
         "passport": "^0.3.2",
         "passport-local": "^1.0.0",
         "passport-local-mongoose": "1.0.1",
         "bcryptjs": "^2.4.0",
-        "async": "^2.1.4"
+        "async": "^2.1.4",
+        "express-flash": "0.0.2"
     }
 }

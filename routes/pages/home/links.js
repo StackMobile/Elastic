@@ -9,17 +9,20 @@ Link = require('../../../models/link');
 router.get('/', (req, res, next) => {
 
 
+    if (req.cookies.email && req.cookies.password) {
+        res.render('pages/home/links', { title: 'links' });
+    } else {
+        res.redirect('/pages/login');
+    }
 
-
-    res.render('pages/home/links', { title: 'Express' });
 });
 
 
 router.post('/', (req, res, next) => {
 
-    Link.find(function(err, links){
+    Link.find(function(err, links) {
 
-        if (err) return res.status(500).send({error: 'database failure'});
+        if (err) return res.status(500).send({ error: 'database failure' });
 
         res.json(links);
     })

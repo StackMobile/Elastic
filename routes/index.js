@@ -5,9 +5,20 @@ var router = express.Router();
 router.use('/pages', require('./pages'));
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+
+    console.log('App is launching...');
+
+    res.render('index', { title: 'Success' });
+
 });
 
+router.get('/logout', (req, res) => {
+
+    res.clearCookie('email');
+    res.clearCookie('password');
+
+    res.redirect('/');
+});
 /* Login Page */
 
 

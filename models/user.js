@@ -11,6 +11,9 @@ var userSchema = new Schema({
     password: String,
     email: String,
     created_at: Date,
+    expire_date: Date,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
 });
 
 userSchema.pre('save', function(next) {

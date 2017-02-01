@@ -9,18 +9,17 @@
                         	<li class="text-muted menu-title">Navigation</li>
 
                             <li >
-                                 <a href="#custom-modal" class="waves-effect" data-animation="fadein" data-plugin="custommodal" 
+                                 <a href="#custom-modal" class="waves-effect <%= title=='newlink' ? 'active' : 'deactive' %>" data-animation="fadein" data-plugin="custommodal" 
                                                     	data-overlaySpeed="100" data-overlayColor="#36404a"><i class="ti-home"></i> <span> New Link </span> </a>
                                 
                             </li>
 
                             <li >
-                                <a href="/pages/home" class="waves-effect active"><i class="ti-paint-bucket"></i> <span> Overview </span> </a>
-                                
+                                <a href="/pages/home" class="waves-effect <%= title=='home' ? 'active' : 'deactive' %>"><i class="ti-paint-bucket"></i> <span> Overview </span> </a>
                             </li>
 
                             <li >
-                                <a href="/pages/links" class="waves-effect"><i class="ti-light-bulb"></i><span> Links </span> </a>
+                                <a href="/pages/links" class="waves-effect <%= title=='links' ? 'active' : 'deactive' %>"><i class="ti-light-bulb"></i><span> Links </span> </a>
                                
                             </li>
                         </ul>

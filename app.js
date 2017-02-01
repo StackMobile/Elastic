@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
+var session = require('express-session');
+var flash = require('express-flash');
 var index = require('./routes');
 var users = require('./routes/users');
 
@@ -30,10 +32,12 @@ function Elastic(config) {
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(cookieParser());
+        app.use(session({ secret: 'session' }));
+        app.use(flash());
         app.use(express.static(path.join(__dirname, 'public')));
         app.use('/', index);
         app.use('/users', users);
-        
+
     };
 
     this.connectMongoDB = () => {
@@ -52,7 +56,7 @@ function Elastic(config) {
         });
     }
 
-     this.initializePassport = () => {
+    this.initializePassport = () => {
         app.use(passport.initialize());
         app.use(passport.session());
 

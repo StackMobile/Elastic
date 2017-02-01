@@ -15,24 +15,33 @@
 						<!--Checkbox Select-->
 						<!--===================================================-->
 						<div class="row">
-							<div class="col-sm-12">
+							<div class="col-sm-8">
 								<div class="card-box">
 									<h4 class="m-t-0 header-title"><b>YOUR LINKS</b></h4>									
-									<table data-toggle="table"  
+									<table 
+                                           data-toolbar = "#toolbar"
 										   data-page-size="10"
-										   data-pagination="true" class="table-bordered ">
+										   data-pagination="true"
+                                           data-id-field= "id"
+                                           data-page-list="[10,25,50,100, ALL]"
+                                           class="table-bordered table" id="table">
 										<thead>
 											<tr>
 												<th data-field="state" data-checkbox="true"></th>
-												<th data-field="id" data-switchable="false">Title</th>
+                                                <th data-field="id" class = "linkId">id</th>
+												<th data-field="title" data-switchable="false">Title</th>
 												<th data-field="date">Date</th>												
-												<th data-field="user-status" class="text-center">Status</th>
+												<th data-field="action" 
+                                                    data-events="actionEvents"
+                                                    data-formatter="actionFormatter"
+                                                    data-align="center">Action</th>
+                                                
 											</tr>
 										</thead>								
 										
-										<tbody id = "searchTblBody">
+									<!-- <tbody id = "searchTblBody">
 																						
-										</tbody>
+										</tbody> -->
 									</table>
 								</div>
 							</div>
@@ -163,6 +172,49 @@
 <% include ../../html/body_end %>
 
 <script language = "JavaScript" >
+
+    var $table = $('#table'), 
+        $remove = $('#remove'),
+        selections = [];
+
+    function actionFormatter(value, row, index) {
+
+        return [
+            '<a href="#" class="edit">',
+            '<i class="md md-edit"></i>',
+            '</a>',
+            '<a href="#" class="remove">',
+            '<i class="md md-close"></i>',
+            '</a>'
+            ].join('');
+    }
+
+    window.actionEvents = {
+        'click .edit' : function (e,value, row, index) {
+
+            alert ('you click edit action , row: ' + JSON.stringify(row));
+        },
+
+        'click .remove' : function (e, value, row, index) {
+
+            $table.bootstrapTable('remove', {
+
+                field: 'id',
+                values: [row.id]
+            });
+
+            $('#table .linkId').hide();
+        }
+    };
+
+    function initTable() {
+
+
+    }
+
+    function getIdSelections() {
+
+    }
     $(document).ready( function() {
 
         function Link(id, title, alert, keywords, categories, sources, start_date, end_date) {
@@ -185,25 +237,48 @@
 
         window.onload = function() {
 
+            //Hidden id Columns
+
+            $('#table .linkId').hide();
+
+            $('#table').on('check.bs.table', function (e, row, $el) {
+                alert('check index: ' + $el.closest('tr').data('index'));
+            });
+            $('#table').on('uncheck.bs.table', function (e, row, $el) {
+                alert('uncheck index: ' + $el.closest('tr').data('index'));
+            });
+
             $.post('/pages/links', function(data) {
 
                     $("#searchTblBody").empty();
-                    console.log("Received data is : " + JSON.stringify(data));
                     //  window.location.href = "/pages/links";
 
                     console.log("data count is : " + data.length);
-
+                    var array = [];
                     for (var i = 0; i < data.length; i++) {
 
                         var temp = data[i];
                         var link = new Link(temp._id, temp.title,  temp.alert, temp.keywords, temp.categories,temp.sources, temp.start_date, temp.end_date);
 
-                        var tr  = '<tr>	<td class = "bs-checkboxs"><input data-index='+i+' name = "btSelectItem" type = "checkbox"></td> <td>'+ link.title + '</td> <td>'+ link.start_date +'</td> <td><a href="#" class="table-action-btn"><i class="md md-edit"></i></a> <a href="#" class="table-action-btn"><i class="md md-close"></i></a>  </td>	</tr>';
+                        var tr = {
 
-                        $("#searchTblBody").append(tr);
+                            id: link.id,
+                            title: link.title,
+                            date: link.start_date,
+                        };
+
+                        array.push(tr);
+                        // var tr  = '<tr>	<td class = "bs-checkboxs"><input data-index='+i+' name = "btSelectItem" type = "checkbox"></td> <td>'+ link.title + '</td> <td>'+ link.start_date +'</td> <td><a href="#" class="table-action-btn"><i class="md md-edit"></i></a> <a href="#" class="table-action-btn"><i class="md md-close"></i></a>  </td>	</tr>';
+
+                        // $("#searchTblBody").append(tr);
                     }
 
 
+                    $('#table').bootstrapTable({
+                        data: array
+                    });
+
+                    $('#table .linkId').hide();
                     
             });
         };

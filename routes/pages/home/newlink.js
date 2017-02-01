@@ -6,7 +6,14 @@ var async = require('async');
 Link = require('../../../models/link');
 
 router.get('/', (req, res, next) => {
-    res.render('pages/home/newlink', { title: 'Express' });
+
+
+    if (req.cookies.email && req.cookies.password) {
+        res.render('pages/home/newlink', { title: 'newlink' });
+    } else {
+        res.redirect('/pages/login');
+    }
+
 });
 
 router.post('/', (req, res, next) => {
@@ -15,7 +22,7 @@ router.post('/', (req, res, next) => {
 
     if (!title) {
 
-        return res.status(500).send({error: 'input error'});
+        return res.status(500).send({ error: 'input error' });
     }
 
     var link = new Link({
@@ -35,12 +42,10 @@ router.post('/', (req, res, next) => {
 
                     console.log("Error is occurred when save a new link");
 
-                    return res.status(500).send({error: 'database failure'});
-                }else {
+                    return res.status(500).send({ error: 'database failure' });
+                } else {
 
-                    res.json(
-                            {link: link}
-                       );
+                    res.json({ link: link });
 
                 }
             });
@@ -59,12 +64,12 @@ router.post('/update', (req, res, next) => {
 
     Link.findById(id, function(err, link) {
 
-        if (err) return res.status(500).json({error: 'database failure'});
+        if (err) return res.status(500).json({ error: 'database failure' });
 
-        if (!link) return res.status(404).json({error: 'link not found'});
+        if (!link) return res.status(404).json({ error: 'link not found' });
 
         console.log(req.body);
-        if (req.body.keywords)  link.keywords = req.body.keywords;
+        if (req.body.keywords) link.keywords = req.body.keywords;
         if (req.body.categories) link.categories = req.body.categories;
         if (req.body.sources) link.sources = req.body.sources;
         if (req.body.start_date) link.start_date = req.body.start_date;
@@ -72,9 +77,9 @@ router.post('/update', (req, res, next) => {
 
         link.save(function(err) {
 
-            if (err) res.status(500).json({error: 'failed to update'});
+            if (err) res.status(500).json({ error: 'failed to update' });
 
-            res.json({message: 'link updated'});
+            res.json({ message: 'link updated' });
         });
     });
 });

@@ -53,8 +53,10 @@ router.post('/', (req, res, next) => {
 
                 res.cookie('email', email);
                 res.cookie('password', password);
+                res.cookie('userid', user.id);
+                res.cookie('username', user.username);
 
-                console.log('password is correct-----------------------------------------------');
+                console.log('password is correct-----------------------------------------------' + user.id);
 
                 res.redirect('/pages/home');
                 return;

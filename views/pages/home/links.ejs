@@ -18,10 +18,10 @@
 							<div class="col-sm-8">
 								<div class="card-box">
 									<h4 class="m-t-10 header-title"><b>YOUR LINKS</b></h4>		
-                                    <button id = "demo-delete-row" class = "btn btn-danger" disabled><i class="fa fa-times m-r-5">
+                                    <button id = "remove" class = "btn btn-danger"  disabled><i class="fa fa-times m-r-5">
                                         </i>Delete</button> 							
 									<table 
-                                           data-toolbar = "#demo-delete-row"
+                                           data-toolbar = "#remove"
 										   data-page-size="10"
 										   data-pagination="true"
                                            data-id-field= "id"
@@ -30,7 +30,7 @@
 										<thead>
 											<tr>
 												<th data-field="state" data-checkbox="true"></th>
-                                                <th data-field="id" class = "linkId">id</th>
+                                                <th data-field="id" class = "linkId hidden" ></th>
 												<th data-field="title" data-switchable="false" data-formatter="invoiceFormatter">Title</th>
 												<th data-field="date">Date</th>												
 												<th data-field="action" 
@@ -179,9 +179,12 @@
         $remove = $('#remove'),
         selections = [];
 
+    var selectedLinkId = '';
+
     function invoiceFormatter(value, row) {
         return '<a href="/pages/home?title='+ value +'" class="btn-link" >' + value + '</a>';
     }
+
     function actionFormatter(value, row, index) {
 
         return [
@@ -208,7 +211,10 @@
                 values: [row.id]
             });
 
-            $('#demo-custom-toolbar .linkId').hide();
+            var arr = [];
+            arr.push(row.id);
+
+            deleteLinks(arr);
         }
     };
 
@@ -219,8 +225,41 @@
 
     function getIdSelections() {
 
+        return $.map($table.bootstrapTable('getSelections'), function(row) {
+            return row.id;
+        });
+
     }
+
+    function deleteLinks(ids){
+
+            var params = {
+                "linkids":ids
+            };
+
+            $.ajax({
+                type:'POST',
+                data: JSON.stringify(params),
+                contentType:'application/json',
+                url:'/pages/links/delete',
+                error: function(error) {
+                    alert("error is occurred=="+error);
+                },
+                dataType:'json',
+                success: function(data) {
+
+                    console.log(data);
+                    // window.location.href = '/pages/links';
+                },
+            });
+        }
+
+
     $(document).ready( function() {
+
+        //delete link
+
+        
 
         function Link(id, title, alert, keywords, categories, sources, start_date, end_date) {
 
@@ -238,20 +277,66 @@
                 var endDate = new Date(end_date);
 
                 this.end_date = moment(endDate).format("MMM Do YY");;
-            }
+        }
 
         window.onload = function() {
 
             //Hidden id Columns
 
-            $('#demo-custom-toolbar .linkId').hide();
+            // $('#demo-custom-toolbar .linkId').hide();
 
-            $('#demo-custom-toolbar').on('check.bs.table', function (e, row, $el) {
-                alert('check index: ' + $el.closest('tr').data('index'));
+
+
+            $table.on('check.bs.table uncheck.bs.table ' +
+                'check-all.bs.table uncheck-all.bs.table', function () {
+                $remove.prop('disabled', !$table.bootstrapTable('getSelections').length);
+
+                // save your data, here just save the current page
+                selections = getIdSelections();
+
+                $.each(selections, function(i, row){
+
+                    console.log("selected index is ----"+ row);
+
+                });
+                // push or splice the selections if you want to save all data selections
             });
-            $('#demo-custom-toolbar').on('uncheck.bs.table', function (e, row, $el) {
-                alert('uncheck index: ' + $el.closest('tr').data('index'));
+
+            $table.on('all.bs.table', function (e, name, args) {
+                // console.log(name, args);
             });
+            $remove.click(function () {
+
+                 var ids = getIdSelections();
+                
+                $.each(ids, function(i, row){
+
+                    console.log("selected id is ----"+ row);
+
+                });                
+                $table.bootstrapTable('remove', {
+                    field: 'id',
+                    values: ids
+                });
+                $remove.prop('disabled', true);
+
+                deleteLinks(ids);
+                
+            });
+
+            // $(window).resize(function () {
+            //     $table.bootstrapTable('resetView', {
+            //         height: getHeight()
+            //     });
+            // });
+
+            // $('#demo-custom-toolbar').on('check.bs.table', function (e, row, $el) {
+            //     alert('check index: ' + $el.closest('tr').data('index'));
+            //     selectedLinkId = 
+            // });
+            // $('#demo-custom-toolbar').on('uncheck.bs.table', function (e, row, $el) {
+            //     alert('uncheck index: ' + $el.closest('tr').data('index'));
+            // });
 
             $.post('/pages/links', function(data) {
 
@@ -283,7 +368,7 @@
                         data: array
                     });
 
-                    $('#demo-custom-toolbar .linkId').hide();
+                    // $('#demo-custom-toolbar .linkId').hide();
                     
             });
         };

@@ -12,5 +12,7 @@ router.use('/home', require('./home/home.js'));
 router.use('/newlink', require('./home/newlink.js'));
 router.use('/newlink/update', require('./home/newlink.js'));
 router.use('/links', require('./home/links.js'));
+router.use('/links/delete', require('./home/links.js'));
+router.use('/links/edit', require('./home/links.js'));
 
 module.exports = router;

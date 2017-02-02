@@ -12,7 +12,7 @@ router.get('/:token', (req, res, next) => {
             return;
         }
 
-        res.redirect('/pages/login');
+        res.redirect('/pages/reset');
     });
 });
 
@@ -33,7 +33,7 @@ router.post('/:token', (req, res, next) => {
                         return res.render('pages/login/forgot_password', { message: 'Error while reset password' + err });
                     }
 
-                    res.render('pages/login/login');
+                    res.render('pages/login/res');
                     done(err, user);
                 });
             });

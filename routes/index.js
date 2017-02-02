@@ -16,6 +16,8 @@ router.get('/logout', (req, res) => {
 
     res.clearCookie('email');
     res.clearCookie('password');
+    res.clearCookie('id');
+    res.clearCookie('username');
 
     res.redirect('/');
 });

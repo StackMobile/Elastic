@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
+// var mongodb = require('mongodb');
 // var path = require('path');
 
 
@@ -20,12 +21,48 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
 
-    Link.find(function(err, links) {
+    var userid = req.cookies.userid;
+
+    Link.find({ "user.userid": userid }, function(err, links) {
 
         if (err) return res.status(500).send({ error: 'database failure' });
 
         res.json(links);
-    })
+    });
+
+});
+
+router.post('/delete', (req, res, next) => {
+
+    var linkids = req.body.linkids;
+    console.log(linkids);
+
+    async.parallel([
+
+        function(callback) {
+            Link.remove({ _id: { $in: linkids } }, function(err) {
+                if (err) return res.status(500).send({ error: 'database failure' });
+                res.status(204).end();
+            });
+
+            callback(null, "success");
+        }
+    ]);
+
+    // Link.remove({ _id: linkid }, function(err, output) {
+
+    //     if (err) return res.status(500).send({ error: 'database failure' });
+
+    //     res.status(204).end();
+    // })
+
+});
+
+router.post('/edit', (req, res, next) => {
+
+    var linkid = req.body.linkid;
+
+
 
 });
 

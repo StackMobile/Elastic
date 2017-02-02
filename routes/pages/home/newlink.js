@@ -7,7 +7,6 @@ Link = require('../../../models/link');
 
 router.get('/', (req, res, next) => {
 
-
     if (req.cookies.email && req.cookies.password) {
         res.render('pages/home/newlink', { title: 'newlink' });
     } else {
@@ -25,9 +24,15 @@ router.post('/', (req, res, next) => {
         return res.status(500).send({ error: 'input error' });
     }
 
+    console.log("user id is -----------------------" + req.cookies.userid);
     var link = new Link({
 
         "title": title,
+        "user": {
+            "userid": req.cookies.userid,
+            "username": req.cookies.username,
+            "email": req.cookies.email
+        }
     });
 
     console.log("Request received : " + title);

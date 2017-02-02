@@ -273,6 +273,12 @@
 
                 var linkId;
 
+                // $('#keywordSelect').tagsinput({
+                //     allowDuplicates: false,
+                //     itemValue: 'id',
+                //     itemText: 'label'
+                // });
+
                 window.onload = function() {
 
                     linkId = window.location.hash.substring(1);
@@ -283,9 +289,58 @@
                     console.log("link title : " + title);
 
                     document.getElementById('linkTitle').innerHTML = title;
+
+                    var param = {
+                        "linkid": linkId
+                    };
+
+                    $.ajax({
+                        type:'POST',
+                        data: JSON.stringify(param),
+                        contentType:'application/json',
+                        url:'/pages/links/get',
+                        error: function(error) {
+                            alert("error is occurred=="+error);
+                        },
+                        dataType:'json',
+                        success: function(data) {
+
+                            console.log(data);
+                            displayLinkInfo(data);
+                        },
+                    });
+
+
+
                 };
 
+                function displayLinkInfo(data) {
+
+                    $.each(data.keywords, function(index, value){
+                        $('#keywordSelect').tagsinput('add',value);
+                    });
+                    $.each(data.categories, function(index, value){
+                        $('#categorySelect').tagsinput('add',value);
+                    });
+                    $.each(data.sources, function(index, value){
+                        $('#sourceSelect').tagsinput('add',value);
+                    });
+
+                    var from = moment(new Date(data.start_date)).format("MM/DD/YYYY");
+                    var to = moment(new Date(data.end_date)).format("MM/DD/YYYY");
+
+
+                    $('#startDateInputField').val(from.toString());
+                    $('#endDateInputField').val(to.toString());
+
+                }
+
+
+
+
                  $(document).ready(function(){
+
+
 
 
                     $('#linkDataSaveButton').click(function(){
@@ -300,9 +355,7 @@
                             console.log("Please input one field at least.");
                             return;
                         }
-
-                        console.log("keywordValues id is ::::::" + keywordValues);
-
+                        
                         var parameter = {
                             "id": linkId,
                             "keywords": keywordValues,
@@ -311,6 +364,8 @@
                             "start_date": startDate,
                             "end_date": endDate
                         };
+
+                        console.log("parameter id is ::::::" + JSON.stringify(parameter));
 
                         $.ajax({
                             type:'POST',

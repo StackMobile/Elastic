@@ -27,9 +27,20 @@ router.post('/', (req, res, next) => {
 
         if (err) return res.status(500).send({ error: 'database failure' });
 
+
         res.json(links);
     });
 
+});
+
+router.post('/get', (req, res, next) => {
+    var linkid = req.body.linkid;
+
+    Link.findOne({ _id: linkid }, function(err, link) {
+        if (err) return res.status(500).send({ error: 'database failure' });
+
+        res.json(link);
+    });
 });
 
 router.post('/delete', (req, res, next) => {

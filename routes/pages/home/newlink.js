@@ -79,6 +79,9 @@ router.post('/update', (req, res, next) => {
         if (req.body.sources) link.sources = req.body.sources;
         if (req.body.start_date) link.start_date = req.body.start_date;
         if (req.body.end_date) link.end_date = req.body.end_date;
+        link.alert = req.body.alert;
+
+        console.log(link);
 
         link.save(function(err) {
 

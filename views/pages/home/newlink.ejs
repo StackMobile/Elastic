@@ -39,7 +39,7 @@
 									<h4 class="m-t-0 m-b-20 header-title"> <b>Alert</b> 
                                         <span>
                                             
-                                                <input type="checkbox" checked data-plugin="switchery" data-color="#f05050"/>
+                                                <input type="checkbox" data-plugin="switchery" data-color="#f05050" class = "switch"/>
                                                
                                         </span>
                                     </h4>
@@ -332,41 +332,51 @@
 
                     $('#startDateInputField').val(from.toString());
                     $('#endDateInputField').val(to.toString());
+                    console.log(data.alert);
+                    // $('.switch').trigger('click');
 
+                    changeSwitcheryState($('.switch'), data.alert);
+                    
+                 }
+
+                 function changeSwitcheryState(el,value){
+                    if($(el).is(':checked')!=value){
+                        $(el).trigger("click")
+                    }
                 }
 
-
-
-
                  $(document).ready(function(){
-
-
-
-
                     $('#linkDataSaveButton').click(function(){
                          var keywordValues = $('#keywordSelect').val() || [];
                         var categoryValues = $('#categorySelect').val()  || [];
                         var sourceValues = $('#sourceSelect').val()  || [];
                         var startDate = $('#startDateInputField').val() || new Date();
                         var endDate = $('#endDateInputField').val() || new Date();
+                        var alert = false;
+                        if ($('.switch').is(':checked')) {
+                            alert = true;
+                        }
+
+                        console.log(alert);
 
                         if (keywordValues.length == 0 && categoryValues.length == 0 && sourceValues.length == 0 && !startDate && !endDate) {
 
                             console.log("Please input one field at least.");
                             return;
                         }
-                        
+
                         var parameter = {
+
                             "id": linkId,
                             "keywords": keywordValues,
                             "categories": categoryValues,
                             "sources": sourceValues,
                             "start_date": startDate,
-                            "end_date": endDate
+                            "end_date": endDate,
+                            "alert": alert
                         };
 
                         console.log("parameter id is ::::::" + JSON.stringify(parameter));
-
                         $.ajax({
                             type:'POST',
                             data: JSON.stringify(parameter),

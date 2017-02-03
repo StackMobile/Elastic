@@ -2094,6 +2094,7 @@ div.mce-edit-area {
 .product-list-box img {
   height: auto;
   margin: 0 auto;
+  margin-left: 0;
   display: block;
 }
 .product-list-box .product-action {

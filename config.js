@@ -76,7 +76,7 @@ Configuration.getBaseConfig = function(multisite) {
     return {
         siteName: 'elastic',
         product: 'Elastic',
-        siteRoot: 'http://localhost:3000',
+        siteRoot: 'http://localhost:3001',
         siteIP: '0, 0, 0, 0',
         sitePort: process.env.port || process.env.PORT || 8080,
         multisite: {
